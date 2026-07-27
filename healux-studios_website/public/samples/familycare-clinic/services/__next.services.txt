@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[79157,["/samples/familycare-clinic/_next/static/chunks/2x0qyayg4n9y0.js","/samples/familycare-clinic/_next/static/chunks/3hwn-tsfexdrx.js","/samples/familycare-clinic/_next/static/chunks/36svl10hy3uwv.js"],"default"]
-3:I[42484,["/samples/familycare-clinic/_next/static/chunks/2x0qyayg4n9y0.js","/samples/familycare-clinic/_next/static/chunks/3hwn-tsfexdrx.js","/samples/familycare-clinic/_next/static/chunks/36svl10hy3uwv.js"],"default"]
+2:I[79157,["/Doctor_Website-maker/samples/familycare-clinic/_next/static/chunks/2x0qyayg4n9y0.js","/Doctor_Website-maker/samples/familycare-clinic/_next/static/chunks/3hwn-tsfexdrx.js","/Doctor_Website-maker/samples/familycare-clinic/_next/static/chunks/36svl10hy3uwv.js"],"default"]
+3:I[42484,["/Doctor_Website-maker/samples/familycare-clinic/_next/static/chunks/2x0qyayg4n9y0.js","/Doctor_Website-maker/samples/familycare-clinic/_next/static/chunks/3hwn-tsfexdrx.js","/Doctor_Website-maker/samples/familycare-clinic/_next/static/chunks/36svl10hy3uwv.js"],"default"]
 4:[]
 0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"8__KSHkdlBUX4fWKuf4p7"}

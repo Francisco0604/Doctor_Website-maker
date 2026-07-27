@@ -13,8 +13,6 @@ if (!basePath) {
   process.exit(0);
 }
 
-const targetDir = path.resolve(process.cwd(), "out");
-
 const activemotionRoutes = [
   "conditions",
   "treatments",
@@ -66,7 +64,37 @@ function replaceInDir(dir) {
   }
 }
 
+function ensureSubfolderIndexes(sampleRootDir) {
+  if (!fs.existsSync(sampleRootDir)) return;
+  const sites = fs.readdirSync(sampleRootDir, { withFileTypes: true });
+  for (const site of sites) {
+    if (site.isDirectory()) {
+      const siteDir = path.join(sampleRootDir, site.name);
+      const files = fs.readdirSync(siteDir, { withFileTypes: true });
+      for (const file of files) {
+        if (file.isFile() && file.name.endsWith('.html') && file.name !== 'index.html' && file.name !== '404.html' && file.name !== '_not-found.html') {
+          const pageName = file.name.replace(/\.html$/, '');
+          const pageDir = path.join(siteDir, pageName);
+          if (!fs.existsSync(pageDir)) {
+            fs.mkdirSync(pageDir, { recursive: true });
+          }
+          const indexPath = path.join(pageDir, 'index.html');
+          fs.copyFileSync(path.join(siteDir, file.name), indexPath);
+          console.log(`Created ${site.name}/${pageName}/index.html from ${file.name}`);
+        }
+      }
+    }
+  }
+}
+
 console.log(`Updating /samples/ paths in out/ and public/samples with prefix ${basePath}...`);
+const outSamplesDir = path.resolve(process.cwd(), "out", "samples");
+const publicSamplesDir = path.resolve(process.cwd(), "public", "samples");
+
 replaceInDir(path.resolve(process.cwd(), "out"));
-replaceInDir(path.resolve(process.cwd(), "public", "samples"));
-console.log("Done updating sample paths!");
+replaceInDir(publicSamplesDir);
+
+ensureSubfolderIndexes(outSamplesDir);
+ensureSubfolderIndexes(publicSamplesDir);
+
+console.log("Done updating sample paths and subfolder index files!");

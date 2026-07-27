@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
-2:I[61646,["/samples/brightsmile-dental/_next/static/chunks/20eydr_-iyu3n.js","/samples/brightsmile-dental/_next/static/chunks/11w4-ybxnbrz3.js","/samples/brightsmile-dental/_next/static/chunks/0dv3r7v15pwzy.js"],"ClientPageRoot"]
-3:I[74305,["/samples/brightsmile-dental/_next/static/chunks/20eydr_-iyu3n.js","/samples/brightsmile-dental/_next/static/chunks/11w4-ybxnbrz3.js","/samples/brightsmile-dental/_next/static/chunks/0dv3r7v15pwzy.js","/samples/brightsmile-dental/_next/static/chunks/3kej8pu8h53m2.js"],"default"]
-6:I[75708,["/samples/brightsmile-dental/_next/static/chunks/20eydr_-iyu3n.js","/samples/brightsmile-dental/_next/static/chunks/11w4-ybxnbrz3.js","/samples/brightsmile-dental/_next/static/chunks/0dv3r7v15pwzy.js"],"OutletBoundary"]
+2:I[61646,["/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/20eydr_-iyu3n.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/11w4-ybxnbrz3.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/0dv3r7v15pwzy.js"],"ClientPageRoot"]
+3:I[74305,["/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/20eydr_-iyu3n.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/11w4-ybxnbrz3.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/0dv3r7v15pwzy.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/3kej8pu8h53m2.js"],"default"]
+6:I[75708,["/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/20eydr_-iyu3n.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/11w4-ybxnbrz3.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/0dv3r7v15pwzy.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/samples/brightsmile-dental/_next/static/chunks/3kej8pu8h53m2.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"f9_RXosyjh6xkwEio7-aG"}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/3kej8pu8h53m2.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"f9_RXosyjh6xkwEio7-aG"}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null
