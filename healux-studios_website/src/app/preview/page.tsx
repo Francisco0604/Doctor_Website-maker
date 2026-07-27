@@ -80,7 +80,8 @@ function PreviewContent() {
 
   const siteParam = searchParams.get("site") || "activemotion-physio";
   const activeSite = (siteParam in SITES_METADATA ? siteParam : "activemotion-physio") as keyof typeof SITES_METADATA;
-  const iframeUrl = `/samples/${activeSite}/index.html`;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const iframeUrl = `${basePath}/samples/${activeSite}/index.html`;
 
   const siteInfo = SITES_METADATA[activeSite];
 
