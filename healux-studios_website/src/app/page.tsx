@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
@@ -19,9 +19,40 @@ import {
   BadgeCheck
 } from "lucide-react";
 import PracticeGrowthCalculator from "@/components/PracticeGrowthCalculator";
+import LiveSimulatorModal from "@/components/LiveSimulatorModal";
 
 export default function AgencyHomePage() {
   const [inquirySent, setInquirySent] = useState(false);
+  const [activePreviewSite, setActivePreviewSite] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const site = params.get("site");
+      if (site) {
+        setActivePreviewSite(site);
+      }
+    }
+  }, []);
+
+  const openSimulator = (siteId: string) => {
+    setActivePreviewSite(siteId);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("site", siteId);
+      window.history.pushState({}, "", url.toString());
+    }
+  };
+
+  const closeSimulator = () => {
+    setActivePreviewSite(null);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("site");
+      window.history.pushState({}, "", url.pathname);
+    }
+  };
+
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -258,12 +289,13 @@ export default function AgencyHomePage() {
                     </div>
                   </div>
 
-                  <Link 
-                    href={`/preview/?site=${demo.id}`}
-                    className="w-full bg-white/5 hover:bg-primary border border-white/10 hover:border-transparent hover:text-black py-3 rounded-xl text-center text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 mt-6"
+                  <button 
+                    type="button"
+                    onClick={() => openSimulator(demo.id)}
+                    className="w-full bg-white/5 hover:bg-primary border border-white/10 hover:border-transparent hover:text-black py-3 rounded-xl text-center text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 mt-6 cursor-pointer"
                   >
                     Open Live Simulator <ExternalLink className="h-3.5 w-3.5" />
-                  </Link>
+                  </button>
                 </div>
               </motion.div>
             ))}
@@ -538,6 +570,13 @@ export default function AgencyHomePage() {
           © {new Date().getFullYear()} HealUX Studios. All rights reserved.
         </p>
       </footer>
+
+      {activePreviewSite && (
+        <LiveSimulatorModal 
+          initialSite={activePreviewSite} 
+          onClose={closeSimulator} 
+        />
+      )}
     </div>
   );
 }

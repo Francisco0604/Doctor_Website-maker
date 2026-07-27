@@ -26,13 +26,25 @@ const activemotionRoutes = [
 
 function replaceInDir(dir) {
   if (!fs.existsSync(dir)) return;
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  let entries = [];
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true });
+  } catch (e) {
+    return;
+  }
+
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       replaceInDir(fullPath);
     } else if (entry.isFile() && (entry.name.endsWith('.html') || entry.name.endsWith('.js') || entry.name.endsWith('.txt') || entry.name.endsWith('.json'))) {
-      let content = fs.readFileSync(fullPath, 'utf8');
+      if (!fs.existsSync(fullPath)) continue;
+      let content = "";
+      try {
+        content = fs.readFileSync(fullPath, 'utf8');
+      } catch (e) {
+        continue;
+      }
       let modified = false;
 
       // Safely replace /samples/ without duplicating basePath
@@ -67,7 +79,11 @@ function replaceInDir(dir) {
       }
 
       if (modified) {
-        fs.writeFileSync(fullPath, content, 'utf8');
+        try {
+          fs.writeFileSync(fullPath, content, 'utf8');
+        } catch (e) {
+          // ignore
+        }
       }
     }
   }
@@ -75,20 +91,34 @@ function replaceInDir(dir) {
 
 function ensureSubfolderIndexes(sampleRootDir) {
   if (!fs.existsSync(sampleRootDir)) return;
-  const sites = fs.readdirSync(sampleRootDir, { withFileTypes: true });
+  let sites = [];
+  try {
+    sites = fs.readdirSync(sampleRootDir, { withFileTypes: true });
+  } catch (e) {
+    return;
+  }
   for (const site of sites) {
     if (site.isDirectory()) {
       const siteDir = path.join(sampleRootDir, site.name);
-      const files = fs.readdirSync(siteDir, { withFileTypes: true });
+      let files = [];
+      try {
+        files = fs.readdirSync(siteDir, { withFileTypes: true });
+      } catch (e) {
+        continue;
+      }
       for (const file of files) {
         if (file.isFile() && file.name.endsWith('.html') && file.name !== 'index.html' && file.name !== '404.html' && file.name !== '_not-found.html') {
           const pageName = file.name.replace(/\.html$/, '');
           const pageDir = path.join(siteDir, pageName);
           if (!fs.existsSync(pageDir)) {
-            fs.mkdirSync(pageDir, { recursive: true });
+            try {
+              fs.mkdirSync(pageDir, { recursive: true });
+            } catch (e) {}
           }
           const indexPath = path.join(pageDir, 'index.html');
-          fs.copyFileSync(path.join(siteDir, file.name), indexPath);
+          try {
+            fs.copyFileSync(path.join(siteDir, file.name), indexPath);
+          } catch (e) {}
         }
       }
     }
