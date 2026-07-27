@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./healux-studios_website
-        run: npm ci
+        run: npm install
 
       - name: Build static site
         working-directory: ./healux-studios_website
