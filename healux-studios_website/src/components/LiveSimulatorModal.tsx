@@ -128,46 +128,48 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col h-screen w-screen bg-slate-100 text-slate-900 overflow-hidden">
-      {/* Top Banner Navigation */}
-      <header className="h-16 px-6 bg-white border-b border-slate-200 shadow-sm flex items-center justify-between shrink-0 z-30">
-        <div className="flex items-center gap-4">
+      {/* Top Banner Navigation - Mobile Optimized */}
+      <header className="h-16 px-3 sm:px-6 bg-white border-b border-slate-200 shadow-sm flex items-center justify-between shrink-0 z-30 gap-2">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
           <button 
             onClick={handleBack}
-            className="flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors uppercase tracking-wider bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg border border-slate-200 cursor-pointer"
+            className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors uppercase tracking-wider bg-slate-100 hover:bg-slate-200 px-2.5 py-1.5 rounded-lg border border-slate-200 cursor-pointer shrink-0"
           >
-            <ArrowLeft className="h-3.5 w-3.5" /> Back to Agency
+            <ArrowLeft className="h-3.5 w-3.5" /> <span className="hidden sm:inline">Back to</span> Agency
           </button>
-          <div className="h-4 w-px bg-slate-200" />
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-black text-slate-900">{siteInfo.name}</span>
-            <span className="hidden md:inline text-xs text-sky-700 bg-sky-50 border border-sky-200/80 px-2 py-0.5 rounded-full font-bold uppercase">
+          <div className="h-4 w-px bg-slate-200 hidden sm:block shrink-0" />
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="text-xs sm:text-sm font-black text-slate-900 truncate max-w-[100px] sm:max-w-[200px] md:max-w-none">
+              {siteInfo.name}
+            </span>
+            <span className="hidden lg:inline text-[10px] text-sky-700 bg-sky-50 border border-sky-200/80 px-2 py-0.5 rounded-full font-bold uppercase shrink-0">
               Live Preview
             </span>
           </div>
         </div>
 
-        {/* Device Switcher */}
-        <div className="hidden sm:flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1">
+        {/* Device Switcher - Accessible on all screen sizes */}
+        <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 gap-0.5 sm:gap-1 shrink-0">
           <button 
             onClick={() => setDevice("desktop")}
-            className={`p-2 rounded-lg transition-all ${device === "desktop" ? "bg-sky-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"}`}
-            title="Desktop Mode"
+            className={`p-1.5 sm:p-2 rounded-lg transition-all ${device === "desktop" ? "bg-sky-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"}`}
+            title="Desktop View"
           >
-            <Laptop className="h-4 w-4" />
+            <Laptop className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
           <button 
             onClick={() => setDevice("tablet")}
-            className={`p-2 rounded-lg transition-all ${device === "tablet" ? "bg-sky-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"}`}
-            title="Tablet Mode"
+            className={`p-1.5 sm:p-2 rounded-lg transition-all ${device === "tablet" ? "bg-sky-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"}`}
+            title="Tablet View"
           >
-            <Tablet className="h-4 w-4" />
+            <Tablet className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
           <button 
             onClick={() => setDevice("mobile")}
-            className={`p-2 rounded-lg transition-all ${device === "mobile" ? "bg-sky-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"}`}
-            title="Mobile Mode"
+            className={`p-1.5 sm:p-2 rounded-lg transition-all ${device === "mobile" ? "bg-sky-600 text-white shadow-sm" : "text-slate-600 hover:text-slate-900"}`}
+            title="Mobile View"
           >
-            <Smartphone className="h-4 w-4" />
+            <Smartphone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
         </div>
 
@@ -175,15 +177,15 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
         <a 
           href="#contact"
           onClick={handleBack}
-          className="bg-sky-600 hover:bg-sky-700 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2 text-white shadow-md shadow-sky-600/20"
+          className="bg-sky-600 hover:bg-sky-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 text-white shadow-md shadow-sky-600/20 shrink-0"
         >
-          Request Similar Website <ExternalLink className="h-3.5 w-3.5" />
+          <span className="hidden sm:inline">Request</span> Inquire <ExternalLink className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
         </a>
       </header>
 
       {/* Main Workspace split */}
       <div className="flex flex-1 overflow-hidden relative">
-        {/* Left Side: Sidebar controls & features */}
+        {/* Left Side: Sidebar controls & features (Desktop) */}
         <aside className="w-80 border-r border-slate-200 bg-white hidden lg:flex flex-col p-6 overflow-y-auto shrink-0 space-y-8">
           <div>
             <h2 className="text-xs font-black uppercase text-sky-600 tracking-widest mb-1.5 flex items-center gap-1">
@@ -254,7 +256,7 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
         </aside>
 
         {/* Center: Live Device Viewport Canvas */}
-        <main className="flex-1 bg-slate-200/80 flex items-center justify-center p-4 md:p-8 overflow-hidden relative">
+        <main className="flex-1 bg-slate-200/80 flex items-center justify-center p-2 sm:p-4 md:p-8 overflow-hidden relative">
           {loading && (
             <div className="absolute inset-0 bg-slate-900/10 backdrop-blur-sm z-20 flex flex-col items-center justify-center gap-3 text-slate-700 font-bold text-sm">
               <Loader2 className="h-8 w-8 text-sky-600 animate-spin" />
@@ -263,19 +265,19 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
           )}
 
           <div 
-            className="h-full bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 border border-slate-300 flex flex-col relative"
+            className="h-full bg-white rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 border border-slate-300 flex flex-col relative w-full"
             style={{ width: getDeviceWidth(), maxWidth: "100%" }}
           >
             {/* Browser Address Bar Header */}
-            <div className="h-10 bg-slate-100 border-b border-slate-200 flex items-center px-4 gap-3 shrink-0">
-              <div className="flex items-center gap-1.5">
-                <div className="h-2.5 w-2.5 rounded-full bg-rose-400" />
-                <div className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-                <div className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+            <div className="h-8 sm:h-10 bg-slate-100 border-b border-slate-200 flex items-center px-3 sm:px-4 gap-2 sm:gap-3 shrink-0">
+              <div className="flex items-center gap-1">
+                <div className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-rose-400" />
+                <div className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-amber-400" />
+                <div className="h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-emerald-400" />
               </div>
-              <div className="flex-1 bg-white border border-slate-200/80 rounded-md px-3 py-1 text-[11px] font-mono text-slate-500 truncate flex items-center gap-2">
+              <div className="flex-1 bg-white border border-slate-200/80 rounded-md px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-mono text-slate-500 truncate flex items-center gap-1.5">
                 <span className="text-emerald-600 font-bold">https://</span>
-                <span className="text-slate-800">{activeSite}.demo-healux.com</span>
+                <span className="text-slate-800 truncate">{activeSite}.demo-healux.com</span>
               </div>
             </div>
 
