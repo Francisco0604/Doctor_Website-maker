@@ -1,16 +1,16 @@
 import type { NextConfig } from "next";
 
+const isVercel = process.env.VERCEL || false;
 const isGithubActions = process.env.GITHUB_ACTIONS || false;
 let repo = "";
 if (isGithubActions && process.env.GITHUB_REPOSITORY) {
   repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, "");
 }
 
-const basePath = repo ? `/${repo}` : "";
+const basePath = isVercel ? "" : (repo ? `/${repo}` : "");
 
 const nextConfig: NextConfig = {
-  output: "export",
-  trailingSlash: true,
+  ...(isVercel ? {} : { output: "export", trailingSlash: true }),
   basePath: basePath || undefined,
   images: {
     unoptimized: true,

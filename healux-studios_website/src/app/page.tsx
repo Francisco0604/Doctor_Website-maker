@@ -453,11 +453,11 @@ export default function AgencyHomePage() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-primary" />
-                <span>+1 (555) 304-4325</span>
+                <span>+91 78750 44836</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-primary" />
-                <span>Design District, Suite 400, NY</span>
+                <span>Candolim, Bardez, Goa, India</span>
               </div>
             </div>
           </div>

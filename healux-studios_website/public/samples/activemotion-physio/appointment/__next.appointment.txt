@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[45102,["/Doctor_Website-maker/samples/activemotion-physio/_next/static/chunks/16ph9abgf7r3u.js","/Doctor_Website-maker/samples/activemotion-physio/_next/static/chunks/2_xyb_4i_z4a8.js","/Doctor_Website-maker/samples/activemotion-physio/_next/static/chunks/3nqnqg3g2kj1_.js"],"default"]
-3:I[31252,["/Doctor_Website-maker/samples/activemotion-physio/_next/static/chunks/16ph9abgf7r3u.js","/Doctor_Website-maker/samples/activemotion-physio/_next/static/chunks/2_xyb_4i_z4a8.js","/Doctor_Website-maker/samples/activemotion-physio/_next/static/chunks/3nqnqg3g2kj1_.js"],"default"]
+2:I[45102,["/samples/activemotion-physio/_next/static/chunks/16ph9abgf7r3u.js","/samples/activemotion-physio/_next/static/chunks/2_xyb_4i_z4a8.js","/samples/activemotion-physio/_next/static/chunks/3nqnqg3g2kj1_.js"],"default"]
+3:I[31252,["/samples/activemotion-physio/_next/static/chunks/16ph9abgf7r3u.js","/samples/activemotion-physio/_next/static/chunks/2_xyb_4i_z4a8.js","/samples/activemotion-physio/_next/static/chunks/3nqnqg3g2kj1_.js"],"default"]
 4:[]
 0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"nhgD6ETSBbKcVQrwsr7tF"}

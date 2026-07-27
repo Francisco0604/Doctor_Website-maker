@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[11151,["/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/1frd329uxnliz.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/1c4x_ire3vs65.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/2sxhhlswlukwc.js"],"default"]
-3:I[49223,["/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/1frd329uxnliz.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/1c4x_ire3vs65.js","/Doctor_Website-maker/samples/brightsmile-dental/_next/static/chunks/2sxhhlswlukwc.js"],"default"]
+2:I[11151,["/samples/brightsmile-dental/_next/static/chunks/1frd329uxnliz.js","/samples/brightsmile-dental/_next/static/chunks/1c4x_ire3vs65.js","/samples/brightsmile-dental/_next/static/chunks/2sxhhlswlukwc.js"],"default"]
+3:I[49223,["/samples/brightsmile-dental/_next/static/chunks/1frd329uxnliz.js","/samples/brightsmile-dental/_next/static/chunks/1c4x_ire3vs65.js","/samples/brightsmile-dental/_next/static/chunks/2sxhhlswlukwc.js"],"default"]
 4:[]
 0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"-sde-ZZjVwbqZfC4ooDRb"}

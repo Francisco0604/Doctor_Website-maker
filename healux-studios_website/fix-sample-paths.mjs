@@ -1,17 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 
+const isVercel = process.env.VERCEL || false;
 const isGithubActions = process.env.GITHUB_ACTIONS || false;
 let repo = "";
 if (isGithubActions && process.env.GITHUB_REPOSITORY) {
   repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, "");
 }
 
-const basePath = repo ? `/${repo}` : "";
-if (!basePath) {
-  console.log("No basePath required. Skipping sample paths update.");
-  process.exit(0);
-}
+const basePath = isVercel ? "" : (repo ? `/${repo}` : "");
 
 const siteRoutesMap = {
   "activemotion-physio": ["conditions", "treatments", "testimonials", "blog", "appointment", "contact", "privacy", "terms"],
@@ -42,18 +39,26 @@ function replaceInDir(dir) {
       }
       let modified = false;
 
-      // Safely replace /samples/ without duplicating basePath
-      const doubleBase = `${basePath}${basePath}`;
-      if (content.includes('/samples/')) {
-        content = content.replaceAll(`${basePath}/samples/`, '__TEMP_SAMPLES_PREFIX__');
-        content = content.replaceAll('/samples/', `${basePath}/samples/`);
-        content = content.replaceAll('__TEMP_SAMPLES_PREFIX__', `${basePath}/samples/`);
+      // Replace /Doctor_Website-maker/samples/ with target ${basePath}/samples/
+      if (content.includes('/Doctor_Website-maker/samples/')) {
+        content = content.replaceAll('/Doctor_Website-maker/samples/', `${basePath}/samples/`);
         modified = true;
       }
 
-      if (content.includes(doubleBase)) {
-        content = content.replaceAll(doubleBase, basePath);
-        modified = true;
+      // Ensure /samples/ has correct basePath prefix without duplication
+      if (basePath) {
+        const doubleBase = `${basePath}${basePath}`;
+        if (content.includes('/samples/')) {
+          content = content.replaceAll(`${basePath}/samples/`, '__TEMP_SAMPLES_PREFIX__');
+          content = content.replaceAll('/samples/', `${basePath}/samples/`);
+          content = content.replaceAll('__TEMP_SAMPLES_PREFIX__', `${basePath}/samples/`);
+          modified = true;
+        }
+
+        if (content.includes(doubleBase)) {
+          content = content.replaceAll(doubleBase, basePath);
+          modified = true;
+        }
       }
 
       for (const [siteName, routes] of Object.entries(siteRoutesMap)) {
@@ -78,9 +83,7 @@ function replaceInDir(dir) {
       if (modified) {
         try {
           fs.writeFileSync(fullPath, content, 'utf8');
-        } catch (e) {
-          // ignore
-        }
+        } catch (e) {}
       }
     }
   }
@@ -122,7 +125,7 @@ function ensureSubfolderIndexes(sampleRootDir) {
   }
 }
 
-console.log(`Updating /samples/ paths in out/ and public/samples with prefix ${basePath}...`);
+console.log(`Updating /samples/ paths with prefix '${basePath}'...`);
 const outSamplesDir = path.resolve(process.cwd(), "out", "samples");
 const publicSamplesDir = path.resolve(process.cwd(), "public", "samples");
 
@@ -132,4 +135,4 @@ replaceInDir(publicSamplesDir);
 ensureSubfolderIndexes(outSamplesDir);
 ensureSubfolderIndexes(publicSamplesDir);
 
-console.log("Done updating sample paths and subfolder index files across all sample sites!");
+console.log("Done updating sample paths and subfolder index files!");
