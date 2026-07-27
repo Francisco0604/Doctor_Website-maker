@@ -259,7 +259,7 @@ export default function AgencyHomePage() {
                   </div>
 
                   <Link 
-                    href={`/preview?site=${demo.id}`}
+                    href={`/preview/?site=${demo.id}`}
                     className="w-full bg-white/5 hover:bg-primary border border-white/10 hover:border-transparent hover:text-black py-3 rounded-xl text-center text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 mt-6"
                   >
                     Open Live Simulator <ExternalLink className="h-3.5 w-3.5" />

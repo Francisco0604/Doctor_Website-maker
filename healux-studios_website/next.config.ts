@@ -10,6 +10,7 @@ const basePath = repo ? `/${repo}` : "";
 
 const nextConfig: NextConfig = {
   output: "export",
+  trailingSlash: true,
   basePath: basePath || undefined,
   images: {
     unoptimized: true,

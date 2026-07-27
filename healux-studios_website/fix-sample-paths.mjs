@@ -35,8 +35,17 @@ function replaceInDir(dir) {
       let content = fs.readFileSync(fullPath, 'utf8');
       let modified = false;
 
+      // Safely replace /samples/ without duplicating basePath
+      const doubleBase = `${basePath}${basePath}`;
       if (content.includes('/samples/')) {
+        content = content.replaceAll(`${basePath}/samples/`, '__TEMP_SAMPLES_PREFIX__');
         content = content.replaceAll('/samples/', `${basePath}/samples/`);
+        content = content.replaceAll('__TEMP_SAMPLES_PREFIX__', `${basePath}/samples/`);
+        modified = true;
+      }
+
+      if (content.includes(doubleBase)) {
+        content = content.replaceAll(doubleBase, basePath);
         modified = true;
       }
 
@@ -80,7 +89,6 @@ function ensureSubfolderIndexes(sampleRootDir) {
           }
           const indexPath = path.join(pageDir, 'index.html');
           fs.copyFileSync(path.join(siteDir, file.name), indexPath);
-          console.log(`Created ${site.name}/${pageName}/index.html from ${file.name}`);
         }
       }
     }
