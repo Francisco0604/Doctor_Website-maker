@@ -39,6 +39,7 @@ jobs:
         working-directory: ./healux-studios_website
         run: |
           npm run build
+          node fix-sample-paths.mjs
           touch out/.nojekyll
 
       - name: Upload artifact
