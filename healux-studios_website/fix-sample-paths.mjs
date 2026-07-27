@@ -13,16 +13,11 @@ if (!basePath) {
   process.exit(0);
 }
 
-const activemotionRoutes = [
-  "conditions",
-  "treatments",
-  "testimonials",
-  "blog",
-  "appointment",
-  "contact",
-  "privacy",
-  "terms"
-];
+const siteRoutesMap = {
+  "activemotion-physio": ["conditions", "treatments", "testimonials", "blog", "appointment", "contact", "privacy", "terms"],
+  "brightsmile-dental": ["treatments", "pricing", "testimonials", "gallery", "faq", "contact", "appointment"],
+  "familycare-clinic": ["services", "about", "appointment", "contact"]
+};
 
 function replaceInDir(dir) {
   if (!fs.existsSync(dir)) return;
@@ -61,19 +56,21 @@ function replaceInDir(dir) {
         modified = true;
       }
 
-      if (fullPath.includes('activemotion-physio')) {
-        for (const route of activemotionRoutes) {
-          const targetHref = `href:"/${route}"`;
-          const replacementHref = `href:"${basePath}/samples/activemotion-physio/${route}"`;
-          if (content.includes(targetHref)) {
-            content = content.replaceAll(targetHref, replacementHref);
-            modified = true;
-          }
-          const htmlTargetHref = `href="/${route}"`;
-          const htmlReplacementHref = `href="${basePath}/samples/activemotion-physio/${route}"`;
-          if (content.includes(htmlTargetHref)) {
-            content = content.replaceAll(htmlTargetHref, htmlReplacementHref);
-            modified = true;
+      for (const [siteName, routes] of Object.entries(siteRoutesMap)) {
+        if (fullPath.includes(siteName)) {
+          for (const route of routes) {
+            const targetHref = `href:"/${route}"`;
+            const replacementHref = `href:"${basePath}/samples/${siteName}/${route}"`;
+            if (content.includes(targetHref)) {
+              content = content.replaceAll(targetHref, replacementHref);
+              modified = true;
+            }
+            const htmlTargetHref = `href="/${route}"`;
+            const htmlReplacementHref = `href="${basePath}/samples/${siteName}/${route}"`;
+            if (content.includes(htmlTargetHref)) {
+              content = content.replaceAll(htmlTargetHref, htmlReplacementHref);
+              modified = true;
+            }
           }
         }
       }
@@ -135,4 +132,4 @@ replaceInDir(publicSamplesDir);
 ensureSubfolderIndexes(outSamplesDir);
 ensureSubfolderIndexes(publicSamplesDir);
 
-console.log("Done updating sample paths and subfolder index files!");
+console.log("Done updating sample paths and subfolder index files across all sample sites!");
