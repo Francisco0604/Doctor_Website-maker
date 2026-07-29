@@ -596,7 +596,7 @@ export default function AgencyHomePage() {
                       required
                       value={formState.name}
                       onChange={(e) => setFormState({...formState, name: e.target.value})}
-                      placeholder="Dr. Sarah Jenkins"
+                      placeholder="Dr. Rajesh Sharma"
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm focus:outline-none focus:border-sky-600 text-slate-900 font-medium" 
                     />
                   </div>
@@ -607,7 +607,7 @@ export default function AgencyHomePage() {
                       required
                       value={formState.email}
                       onChange={(e) => setFormState({...formState, email: e.target.value})}
-                      placeholder="doctor@practice.com"
+                      placeholder="doctor@clinic.in"
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm focus:outline-none focus:border-sky-600 text-slate-900 font-medium" 
                     />
                   </div>
@@ -621,7 +621,7 @@ export default function AgencyHomePage() {
                       required
                       value={formState.practice}
                       onChange={(e) => setFormState({...formState, practice: e.target.value})}
-                      placeholder="Apex Medical Center"
+                      placeholder="Apollo Healthcare / Care Clinic"
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm focus:outline-none focus:border-sky-600 text-slate-900 font-medium" 
                     />
                   </div>

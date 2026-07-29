@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { DollarSign, Users, Award, TrendingUp, Sparkles } from "lucide-react";
+import { IndianRupee, Users, Award, TrendingUp, Sparkles } from "lucide-react";
 
 export default function PracticeGrowthCalculator() {
   const [currentPatients, setCurrentPatients] = useState(250);
-  const [patientValue, setPatientValue] = useState(150);
+  const [patientValue, setPatientValue] = useState(1500);
 
   const estimatedNewPatients = Math.round(currentPatients * 0.18);
   const monthlyRevenueIncrease = estimatedNewPatients * patientValue;
@@ -56,25 +56,25 @@ export default function PracticeGrowthCalculator() {
           <div className="space-y-3">
             <div className="flex justify-between items-center text-sm">
               <label className="font-semibold text-slate-700 flex items-center gap-2">
-                <DollarSign className="h-4 w-4 text-sky-600" />
-                Average Patient Value ($)
+                <IndianRupee className="h-4 w-4 text-sky-600" />
+                Average Patient Value (₹)
               </label>
               <span className="font-extrabold text-sky-800 bg-sky-50 px-3 py-1 rounded-lg border border-sky-200/80">
-                ${patientValue}
+                ₹{patientValue.toLocaleString('en-IN')}
               </span>
             </div>
             <input
               type="range"
-              min="50"
-              max="1500"
-              step="25"
+              min="500"
+              max="15000"
+              step="250"
               value={patientValue}
               onChange={(e) => setPatientValue(Number(e.target.value))}
               className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
             />
             <div className="flex justify-between text-[10px] text-slate-400 font-bold uppercase">
-              <span>$50</span>
-              <span>$1,500</span>
+              <span>₹500</span>
+              <span>₹15,000</span>
             </div>
           </div>
         </div>
@@ -96,10 +96,10 @@ export default function PracticeGrowthCalculator() {
             </div>
             <p className="text-[10px] text-emerald-700 font-bold uppercase tracking-wider">Est. Revenue Increase</p>
             <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-black text-emerald-700">${monthlyRevenueIncrease.toLocaleString()}</span>
+              <span className="text-3xl font-black text-emerald-700">₹{monthlyRevenueIncrease.toLocaleString('en-IN')}</span>
               <span className="text-xs text-emerald-700 font-bold">/ mo</span>
             </div>
-            <p className="text-xs text-emerald-800 font-semibold mt-2">+${annualRevenueIncrease.toLocaleString()} / year</p>
+            <p className="text-xs text-emerald-800 font-semibold mt-2">+₹{annualRevenueIncrease.toLocaleString('en-IN')} / year</p>
           </div>
         </div>
 
