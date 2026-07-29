@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 
@@ -18,13 +17,13 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Treatments", href: "/treatments" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Testimonials", href: "/testimonials" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "FAQ", href: "/faq" },
-    { name: "Contact", href: "/contact" },
+    { name: "Home", href: "index.html" },
+    { name: "Treatments", href: "treatments.html" },
+    { name: "Gallery", href: "gallery.html" },
+    { name: "Testimonials", href: "testimonials.html" },
+    { name: "Pricing", href: "pricing.html" },
+    { name: "FAQ", href: "faq.html" },
+    { name: "Contact", href: "contact.html" },
   ];
 
   return (
@@ -35,29 +34,29 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center space-x-2">
+          <a href="index.html" className="flex items-center space-x-2">
             <span className={`text-2xl font-serif font-bold ${scrolled ? "text-primary" : "text-primary"}`}>
               BrightSmile
             </span>
-          </Link>
+          </a>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
                 href={link.href}
                 className="text-sm font-medium text-gray-700 hover:text-secondary transition-colors"
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
-            <Link
-              href="/contact"
+            <a
+              href="contact.html"
               className="bg-primary text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105"
             >
               Book Consultation
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -83,23 +82,23 @@ const Navbar = () => {
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                   className="block px-3 py-4 text-base font-medium text-gray-700 hover:text-secondary border-b border-gray-50"
                 >
                   {link.name}
-                </Link>
+                </a>
               ))}
               <div className="pt-4">
-                <Link
-                  href="/contact"
+                <a
+                  href="contact.html"
                   onClick={() => setIsOpen(false)}
                   className="block w-full text-center bg-primary text-white px-6 py-3 rounded-xl font-semibold"
                 >
                   Book Consultation
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>

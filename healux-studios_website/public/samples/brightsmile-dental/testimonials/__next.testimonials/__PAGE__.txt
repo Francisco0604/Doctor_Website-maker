@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
-2:I[84932,["/samples/brightsmile-dental/_next/static/chunks/1frd329uxnliz.js","/samples/brightsmile-dental/_next/static/chunks/1c4x_ire3vs65.js","/samples/brightsmile-dental/_next/static/chunks/2sxhhlswlukwc.js"],"ClientPageRoot"]
-3:I[46883,["/samples/brightsmile-dental/_next/static/chunks/1frd329uxnliz.js","/samples/brightsmile-dental/_next/static/chunks/1c4x_ire3vs65.js","/samples/brightsmile-dental/_next/static/chunks/2sxhhlswlukwc.js","/samples/brightsmile-dental/_next/static/chunks/1nd59lao94lq4.js"],"default"]
-6:I[29190,["/samples/brightsmile-dental/_next/static/chunks/1frd329uxnliz.js","/samples/brightsmile-dental/_next/static/chunks/1c4x_ire3vs65.js","/samples/brightsmile-dental/_next/static/chunks/2sxhhlswlukwc.js"],"OutletBoundary"]
+2:I[84932,["/samples/brightsmile-dental/_next/static/chunks/3iw0x-2-mmxe5.js","/samples/brightsmile-dental/_next/static/chunks/1c4x_ire3vs65.js","/samples/brightsmile-dental/_next/static/chunks/3clq96pm41-9m.js"],"ClientPageRoot"]
+3:I[46883,["/samples/brightsmile-dental/_next/static/chunks/3iw0x-2-mmxe5.js","/samples/brightsmile-dental/_next/static/chunks/1c4x_ire3vs65.js","/samples/brightsmile-dental/_next/static/chunks/3clq96pm41-9m.js","/samples/brightsmile-dental/_next/static/chunks/1nd59lao94lq4.js"],"default"]
+6:I[29190,["/samples/brightsmile-dental/_next/static/chunks/3iw0x-2-mmxe5.js","/samples/brightsmile-dental/_next/static/chunks/1c4x_ire3vs65.js","/samples/brightsmile-dental/_next/static/chunks/3clq96pm41-9m.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/samples/brightsmile-dental/_next/static/chunks/1nd59lao94lq4.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"-sde-ZZjVwbqZfC4ooDRb"}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/samples/brightsmile-dental/_next/static/chunks/1nd59lao94lq4.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"6A1wy4lc43xYIE1ChlFEl"}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null

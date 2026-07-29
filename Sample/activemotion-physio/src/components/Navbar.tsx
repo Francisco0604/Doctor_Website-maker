@@ -1,18 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Activity, Calendar } from "lucide-react";
 
 const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "Conditions", href: "/conditions" },
-  { name: "Treatments", href: "/treatments" },
-  { name: "Testimonials", href: "/testimonials" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
+  { name: "Home", href: "index.html" },
+  { name: "Conditions", href: "conditions.html" },
+  { name: "Treatments", href: "treatments.html" },
+  { name: "Testimonials", href: "testimonials.html" },
+  { name: "Blog", href: "blog.html" },
+  { name: "Contact", href: "contact.html" },
 ];
 
 export default function Navbar() {
@@ -36,17 +35,17 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2">
+          <a href="index.html" className="flex items-center gap-2">
             <Activity className="h-8 w-8 text-orange-600" />
             <span className="text-2xl font-black tracking-tighter text-slate-900">
               ACTIVEMOTION
             </span>
-          </Link>
+          </a>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
                 href={link.href}
                 className={`text-sm font-semibold transition-colors hover:text-orange-600 ${
@@ -54,12 +53,12 @@ export default function Navbar() {
                 }`}
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
-            <Link href="/appointment" className="btn-primary py-2 px-5 text-sm">
+            <a href="appointment.html" className="btn-primary py-2 px-5 text-sm flex items-center gap-1.5">
               <Calendar className="h-4 w-4" />
               Book Assessment
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -85,7 +84,7 @@ export default function Navbar() {
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
@@ -94,16 +93,16 @@ export default function Navbar() {
                   }`}
                 >
                   {link.name}
-                </Link>
+                </a>
               ))}
               <div className="pt-4">
-                <Link
-                  href="/appointment"
+                <a
+                  href="appointment.html"
                   onClick={() => setIsOpen(false)}
-                  className="btn-primary w-full"
+                  className="btn-primary w-full block text-center"
                 >
                   Book Assessment
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>

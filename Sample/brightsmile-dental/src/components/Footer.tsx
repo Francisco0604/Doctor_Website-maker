@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { Globe, MessageSquare, Share2, MapPin, Phone, Mail } from "lucide-react";
 
 const Footer = () => {
@@ -24,10 +23,10 @@ const Footer = () => {
           <div className="space-y-6">
             <h4 className="text-lg font-semibold border-b border-white/10 pb-2">Quick Links</h4>
             <ul className="space-y-3 text-gray-300 text-sm">
-              <li><Link href="/treatments" className="hover:text-secondary transition-colors">Treatments</Link></li>
-              <li><Link href="/gallery" className="hover:text-secondary transition-colors">Smile Gallery</Link></li>
-              <li><Link href="/pricing" className="hover:text-secondary transition-colors">Pricing & Finance</Link></li>
-              <li><Link href="/faq" className="hover:text-secondary transition-colors">FAQs</Link></li>
+              <li><a href="treatments.html" className="hover:text-secondary transition-colors">Treatments</a></li>
+              <li><a href="gallery.html" className="hover:text-secondary transition-colors">Smile Gallery</a></li>
+              <li><a href="pricing.html" className="hover:text-secondary transition-colors">Pricing & Finance</a></li>
+              <li><a href="faq.html" className="hover:text-secondary transition-colors">FAQs</a></li>
             </ul>
           </div>
 
@@ -64,8 +63,8 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-8 flex flex-col md:row justify-between items-center text-xs text-gray-400 space-y-4 md:space-y-0">
           <p>© 2024 BrightSmile Dental Care. All rights reserved.</p>
           <div className="flex space-x-6">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            <a href="privacy.html" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="terms.html" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

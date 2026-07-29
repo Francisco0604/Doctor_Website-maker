@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { Activity, Mail, Phone, MapPin, Globe, MessageSquare, Share2 } from "lucide-react";
 
 export default function Footer() {
@@ -9,12 +8,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand Col */}
           <div className="col-span-1 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-6">
+            <a href="index.html" className="flex items-center gap-2 mb-6">
               <Activity className="h-8 w-8 text-orange-500" />
               <span className="text-2xl font-black tracking-tighter text-white">
                 ACTIVEMOTION
               </span>
-            </Link>
+            </a>
             <p className="text-sm leading-relaxed mb-6">
               Leading physiotherapy clinic specializing in sports rehabilitation and movement
               optimization. We help you move better, recover faster, and live pain-free.
@@ -30,10 +29,10 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-bold mb-6">Quick Links</h3>
             <ul className="space-y-4 text-sm">
-              <li><Link href="/conditions" className="hover:text-orange-500 transition-colors">Conditions Treated</Link></li>
-              <li><Link href="/treatments" className="hover:text-orange-500 transition-colors">Treatment Plans</Link></li>
-              <li><Link href="/testimonials" className="hover:text-orange-500 transition-colors">Success Stories</Link></li>
-              <li><Link href="/blog" className="hover:text-orange-500 transition-colors">Health Blog</Link></li>
+              <li><a href="conditions.html" className="hover:text-orange-500 transition-colors">Conditions Treated</a></li>
+              <li><a href="treatments.html" className="hover:text-orange-500 transition-colors">Treatment Plans</a></li>
+              <li><a href="testimonials.html" className="hover:text-orange-500 transition-colors">Success Stories</a></li>
+              <li><a href="blog.html" className="hover:text-orange-500 transition-colors">Health Blog</a></li>
             </ul>
           </div>
 
@@ -72,8 +71,8 @@ export default function Footer() {
         <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
           <p>© {new Date().getFullYear()} ActiveMotion Physiotherapy. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            <a href="privacy.html" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="terms.html" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

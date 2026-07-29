@@ -73,6 +73,22 @@ export default function AgencyHomePage() {
     e.preventDefault();
     if (formState.name && formState.email) {
       setInquirySent(true);
+
+      // Compose mailto link to healuxstudio@gmail.com
+      const subject = encodeURIComponent(`Medical Website Inquiry: ${formState.practice} (${formState.name})`);
+      const body = encodeURIComponent(
+        `Hello HealUX Studios,\n\nI would like to inquire about a medical website for my practice.\n\n` +
+        `Name: ${formState.name}\n` +
+        `Email: ${formState.email}\n` +
+        `Practice Name: ${formState.practice}\n` +
+        `Specialty: ${formState.specialty}\n` +
+        `Message / Goals: ${formState.message || "N/A"}\n\n` +
+        `Best regards,\n${formState.name}`
+      );
+      
+      if (typeof window !== "undefined") {
+        window.location.href = `mailto:healuxstudio@gmail.com?subject=${subject}&body=${body}`;
+      }
     }
   };
 
@@ -352,28 +368,37 @@ export default function AgencyHomePage() {
           {[
             {
               icon: ShieldCheck,
+              category: "SECURITY STANDARD",
               title: "HIPAA Compliant",
               desc: "Form data, patient inquiries, and scheduling forms are end-to-end encrypted to safeguard Protected Health Information (PHI)."
             },
             {
               icon: Smartphone,
+              category: "ACCESSIBILITY",
               title: "ADA Accessible",
               desc: "Fully aligned with WCAG 2.1 accessibility guidelines, ensuring all patients can read and book seamlessly on any device."
             },
             {
               icon: Search,
+              category: "LOCAL SEO",
               title: "Local Google SEO",
               desc: "Medical schema markup structured to list your clinic #1 on Google Local Maps and regional doctor searches."
             },
             {
               icon: Zap,
+              category: "SPEED BENCHMARK",
               title: "0.4s Fast Load",
               desc: "Blazing fast page loads minimize patient drop-offs, boosting appointment conversion rates by up to 2.5x."
             }
           ].map((item, index) => (
-            <div key={index} className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-slate-200/80 shadow-sm hover:shadow-lg transition-all space-y-4 sm:space-y-5">
-              <div className="h-12 w-12 bg-sky-50 rounded-2xl flex items-center justify-center border border-sky-100">
-                <item.icon className="h-6 w-6 text-sky-600" />
+            <div key={index} className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-slate-200/80 border-t-4 border-t-sky-500 shadow-sm space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="h-11 w-11 bg-sky-50 rounded-xl flex items-center justify-center border border-sky-100/80">
+                  <item.icon className="h-5 w-5 text-sky-600" />
+                </div>
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 bg-slate-100 border border-slate-200/60 px-2.5 py-1 rounded-md">
+                  {item.category}
+                </span>
               </div>
               <h3 className="text-base sm:text-lg font-bold text-slate-900">{item.title}</h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">{item.desc}</p>
@@ -435,19 +460,39 @@ export default function AgencyHomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          {[
-            { step: "01", title: "Practice Deep-Dive", text: "We analyze your specialty services, patient demographics, and local Google Map rankings." },
-            { step: "02", title: "Patient Flow Design", text: "We structure clear navigation paths so patients in pain can quickly find info and book." },
-            { step: "03", title: "Clinical Copy & Branding", text: "We write medically precise, high-trust content combined with clean, modern aesthetics." },
-            { step: "04", title: "Secure Deployment", text: "We launch your site on high-speed SSL servers with active calendar booking integration." }
-          ].map((item, idx) => (
-            <div key={idx} className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-slate-200/80 shadow-sm space-y-3 sm:space-y-4 relative overflow-hidden">
-              <span className="text-4xl sm:text-5xl font-black text-slate-100 absolute right-4 top-4 select-none">{item.step}</span>
-              <h3 className="text-base sm:text-lg font-bold text-slate-900 relative z-10">{item.title}</h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed relative z-10 font-medium">{item.text}</p>
-            </div>
-          ))}
+        {/* Interconnected Timeline Grid */}
+        <div className="relative">
+          {/* Subtle background connecting line for desktop */}
+          <div className="hidden lg:block absolute top-7 left-12 right-12 h-1 bg-gradient-to-r from-sky-200 via-teal-300 to-sky-200 z-0 rounded-full" />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative z-10">
+            {[
+              { step: "01", phase: "STEP 1 • DISCOVERY", title: "Practice Deep-Dive", text: "We analyze your specialty services, patient demographics, and local Google Map rankings." },
+              { step: "02", phase: "STEP 2 • ARCHITECTURE", title: "Patient Flow Design", text: "We structure clear navigation paths so patients in pain can quickly find info and book." },
+              { step: "03", phase: "STEP 3 • BRANDING", title: "Clinical Copy & Branding", text: "We write medically precise, high-trust content combined with clean, modern aesthetics." },
+              { step: "04", phase: "STEP 4 • LAUNCH", title: "Secure Deployment", text: "We launch your site on high-speed SSL servers with active calendar booking integration." }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-slate-200/90 shadow-sm space-y-4 relative flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="h-10 w-10 sm:h-12 sm:w-12 rounded-2xl bg-gradient-to-br from-sky-500 to-teal-600 text-white text-sm sm:text-base font-black flex items-center justify-center shadow-md shadow-sky-500/20 z-10">
+                      {item.step}
+                    </span>
+                    <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-teal-800 bg-teal-50 border border-teal-200/70 px-2.5 py-1 rounded-full">
+                      {item.phase}
+                    </span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900">{item.title}</h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mt-2 font-medium">{item.text}</p>
+                </div>
+
+                <div className="pt-4 text-xs font-extrabold text-slate-400 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>Phase {idx + 1} of 4</span>
+                  {idx < 3 && <span className="hidden lg:inline text-sky-500 font-bold ml-auto">→</span>}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -464,24 +509,43 @@ export default function AgencyHomePage() {
             </p>
             
             <div className="space-y-3.5 pt-2 text-xs sm:text-sm text-slate-700 font-semibold">
-              <div className="flex items-center gap-3">
-                <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-600 shrink-0">
+              <a 
+                href="mailto:healuxstudio@gmail.com" 
+                className="flex items-center gap-3 hover:text-sky-600 transition-colors group"
+              >
+                <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-600 shrink-0 group-hover:bg-sky-600 group-hover:text-white transition-colors">
                   <Mail className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
                 </div>
-                <span className="truncate">hello@healuxstudios.com</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-600 shrink-0">
+                <span className="truncate">healuxstudio@gmail.com</span>
+              </a>
+              <a 
+                href="https://wa.me/917875044836?text=Hi%20HealUX%20Studios,%20I'm%20interested%20in%20a%20website%20for%20my%20medical%20practice." 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 hover:text-emerald-600 transition-colors group"
+              >
+                <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
                   <Phone className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
                 </div>
-                <span>+91 78750 44836</span>
-              </div>
+                <span>+91 78750 44836 (Call or WhatsApp)</span>
+              </a>
               <div className="flex items-center gap-3">
                 <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-600 shrink-0">
                   <MapPin className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
                 </div>
                 <span>Candolim, Bardez, Goa, India</span>
               </div>
+            </div>
+
+            <div className="pt-2">
+              <a 
+                href="https://wa.me/917875044836?text=Hi%20HealUX%20Studios,%20I%20would%20like%20to%20inquire%20about%20a%20website%20design%20for%20my%20clinic." 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl shadow-md shadow-emerald-600/20 transition-all"
+              >
+                <MessageSquare className="h-4 w-4" /> Chat Directly on WhatsApp
+              </a>
             </div>
           </div>
 
@@ -490,15 +554,37 @@ export default function AgencyHomePage() {
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-10 sm:py-12 space-y-4"
+                className="text-center py-8 sm:py-10 space-y-4"
               >
                 <div className="h-14 w-14 sm:h-16 sm:w-16 bg-emerald-100 border border-emerald-300 rounded-full flex items-center justify-center mx-auto">
                   <CheckCircle2 className="h-7 w-7 sm:h-8 sm:w-8 text-emerald-600" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900">Consultation Request Received!</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900">Inquiry Composed!</h3>
                 <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto font-medium">
-                  Thank you, Doctor. Our Web Architect will review your local map positions and contact you within 24 hours.
+                  Your email client has been launched with your inquiry addressed to <strong className="text-slate-900">healuxstudio@gmail.com</strong>.
                 </p>
+                <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+                  <a 
+                    href={`mailto:healuxstudio@gmail.com?subject=${encodeURIComponent(`Medical Website Inquiry: ${formState.practice}`)}&body=${encodeURIComponent(`Name: ${formState.name}\nEmail: ${formState.email}\nPractice: ${formState.practice}\nSpecialty: ${formState.specialty}\nMessage: ${formState.message}`)}`}
+                    className="bg-sky-600 hover:bg-sky-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md"
+                  >
+                    <Mail className="h-4 w-4" /> Re-open Email
+                  </a>
+                  <a 
+                    href={`https://wa.me/917875044836?text=${encodeURIComponent(`Hi HealUX Studios, I'm Dr. ${formState.name} from ${formState.practice} (${formState.specialty}). I sent an inquiry regarding: ${formState.message}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md"
+                  >
+                    <MessageSquare className="h-4 w-4" /> Send on WhatsApp
+                  </a>
+                </div>
+                <button 
+                  onClick={() => setInquirySent(false)} 
+                  className="text-xs font-bold text-slate-400 hover:text-slate-600 underline pt-2 block mx-auto cursor-pointer"
+                >
+                  Fill form again
+                </button>
               </motion.div>
             ) : (
               <form onSubmit={handleInquirySubmit} className="space-y-4 sm:space-y-5">

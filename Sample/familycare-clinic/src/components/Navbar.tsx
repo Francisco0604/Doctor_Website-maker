@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Heart } from "lucide-react";
@@ -18,11 +17,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "Appointment", href: "/appointment" },
-    { name: "Contact", href: "/contact" },
+    { name: "Home", href: "index.html" },
+    { name: "About", href: "about.html" },
+    { name: "Services", href: "services.html" },
+    { name: "Appointment", href: "appointment.html" },
+    { name: "Contact", href: "contact.html" },
   ];
 
   return (
@@ -33,30 +32,30 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2">
+          <a href="index.html" className="flex items-center gap-2">
             <Heart className="text-blue-600 fill-blue-600 h-8 w-8" />
             <span className={`text-xl font-bold ${scrolled ? "text-gray-900" : "text-blue-900"}`}>
               FamilyCare<span className="text-blue-600">Clinic</span>
             </span>
-          </Link>
+          </a>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
                 href={link.href}
                 className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
-            <Link
-              href="/appointment"
+            <a
+              href="appointment.html"
               className="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors"
             >
               Book Now
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -75,22 +74,22 @@ const Navbar = () => {
         >
           <div className="flex flex-col p-4 gap-4">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
                 href={link.href}
                 className="text-gray-700 hover:text-blue-600 font-medium py-2"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
-            <Link
-              href="/appointment"
+            <a
+              href="appointment.html"
               className="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold text-center hover:bg-blue-700 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Book Now
-            </Link>
+            </a>
           </div>
         </motion.div>
       )}

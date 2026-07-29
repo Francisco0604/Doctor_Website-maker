@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
-2:I[43257,["/samples/familycare-clinic/_next/static/chunks/3f8l4e8kmhe9g.js","/samples/familycare-clinic/_next/static/chunks/0kq_fviris7kq.js","/samples/familycare-clinic/_next/static/chunks/3ge8u5nf04guu.js"],"ClientPageRoot"]
-3:I[78122,["/samples/familycare-clinic/_next/static/chunks/3f8l4e8kmhe9g.js","/samples/familycare-clinic/_next/static/chunks/0kq_fviris7kq.js","/samples/familycare-clinic/_next/static/chunks/3ge8u5nf04guu.js","/samples/familycare-clinic/_next/static/chunks/0t-0ip-7rm6zx.js"],"default"]
-6:I[47254,["/samples/familycare-clinic/_next/static/chunks/3f8l4e8kmhe9g.js","/samples/familycare-clinic/_next/static/chunks/0kq_fviris7kq.js","/samples/familycare-clinic/_next/static/chunks/3ge8u5nf04guu.js"],"OutletBoundary"]
+2:I[43257,["/samples/familycare-clinic/_next/static/chunks/3pht2n4iwwavt.js","/samples/familycare-clinic/_next/static/chunks/0kq_fviris7kq.js","/samples/familycare-clinic/_next/static/chunks/3ge8u5nf04guu.js"],"ClientPageRoot"]
+3:I[78122,["/samples/familycare-clinic/_next/static/chunks/3pht2n4iwwavt.js","/samples/familycare-clinic/_next/static/chunks/0kq_fviris7kq.js","/samples/familycare-clinic/_next/static/chunks/3ge8u5nf04guu.js","/samples/familycare-clinic/_next/static/chunks/0t-0ip-7rm6zx.js"],"default"]
+6:I[47254,["/samples/familycare-clinic/_next/static/chunks/3pht2n4iwwavt.js","/samples/familycare-clinic/_next/static/chunks/0kq_fviris7kq.js","/samples/familycare-clinic/_next/static/chunks/3ge8u5nf04guu.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/samples/familycare-clinic/_next/static/chunks/0t-0ip-7rm6zx.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ihj-g8DqyjzAZvj-jDeGT"}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/samples/familycare-clinic/_next/static/chunks/0t-0ip-7rm6zx.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"P1npqBVFEN23GlFzHdBP1"}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null

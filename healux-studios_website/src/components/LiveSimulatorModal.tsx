@@ -9,7 +9,9 @@ import {
   Sparkles, 
   CheckCircle, 
   ExternalLink, 
-  Loader2 
+  Loader2,
+  FileText,
+  Compass
 } from "lucide-react";
 
 export const SITES_METADATA = {
@@ -28,7 +30,15 @@ export const SITES_METADATA = {
       "Condition Treatment Directory",
       "Sticky 'Book Assessment' Conversion CTA"
     ],
-    pages: ["Home", "Treatments", "Conditions", "Testimonials", "Blog", "Appointment", "Contact"],
+    pages: [
+      { label: "Home", file: "index.html" },
+      { label: "Treatments", file: "treatments.html" },
+      { label: "Conditions", file: "conditions.html" },
+      { label: "Testimonials", file: "testimonials.html" },
+      { label: "Blog", file: "blog.html" },
+      { label: "Appointment", file: "appointment.html" },
+      { label: "Contact", file: "contact.html" }
+    ],
     designVibe: "High-energy, Movement-focused, Athlete-friendly, Clean & Scientific"
   },
   "brightsmile-dental": {
@@ -46,7 +56,15 @@ export const SITES_METADATA = {
       "Pricing & Financing Calculator",
       "Premium Floating WhatsApp Integration"
     ],
-    pages: ["Home", "Treatments", "Pricing", "Testimonials", "Gallery", "FAQ", "Contact"],
+    pages: [
+      { label: "Home", file: "index.html" },
+      { label: "Treatments", file: "treatments.html" },
+      { label: "Pricing", file: "pricing.html" },
+      { label: "Testimonials", file: "testimonials.html" },
+      { label: "Gallery", file: "gallery.html" },
+      { label: "FAQ", file: "faq.html" },
+      { label: "Contact", file: "contact.html" }
+    ],
     designVibe: "Luxury, Clean, Elegant Serif Typography, High Trust, Spacious Layout"
   },
   "familycare-clinic": {
@@ -64,7 +82,13 @@ export const SITES_METADATA = {
       "Physician Profiles & Patient Success Stories",
       "Responsive Accessible Layout Structure"
     ],
-    pages: ["Home", "Services", "About Aisha Sharma", "Appointment", "Contact"],
+    pages: [
+      { label: "Home", file: "index.html" },
+      { label: "Services", file: "services.html" },
+      { label: "About Us", file: "about.html" },
+      { label: "Appointment", file: "appointment.html" },
+      { label: "Contact", file: "contact.html" }
+    ],
     designVibe: "Warm, Inclusive, Approachable, Highly Readable, ADA Accessible"
   }
 };
@@ -79,18 +103,21 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
   const [activeSite, setActiveSite] = useState<keyof typeof SITES_METADATA>(
     (initialSite in SITES_METADATA ? initialSite : "activemotion-physio") as keyof typeof SITES_METADATA
   );
+  const [activePage, setActivePage] = useState<string>("index.html");
   const [loadedSite, setLoadedSite] = useState<string>("");
 
   useEffect(() => {
     if (initialSite && initialSite in SITES_METADATA) {
       setActiveSite(initialSite as keyof typeof SITES_METADATA);
+      setActivePage("index.html");
     }
   }, [initialSite]);
 
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-  const iframeUrl = `${basePath}/samples/${activeSite}/index.html`;
+  const iframeUrl = `${basePath}/samples/${activeSite}/${activePage}`;
   const siteInfo = SITES_METADATA[activeSite];
-  const loading = loadedSite !== activeSite;
+  const currentPathKey = `${activeSite}-${activePage}`;
+  const loading = loadedSite !== currentPathKey;
 
   const getDeviceWidth = () => {
     switch (device) {
@@ -103,16 +130,21 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
   };
 
   const handleIframeLoad = () => {
-    setLoadedSite(activeSite);
+    setLoadedSite(currentPathKey);
   };
 
   const handleSwitchSite = (key: string) => {
     setActiveSite(key as keyof typeof SITES_METADATA);
+    setActivePage("index.html");
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
       url.searchParams.set("site", key);
       window.history.pushState({}, "", url.toString());
     }
+  };
+
+  const handleSelectPage = (file: string) => {
+    setActivePage(file);
   };
 
   const handleBack = () => {
@@ -143,7 +175,7 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
               {siteInfo.name}
             </span>
             <span className="hidden lg:inline text-[10px] text-sky-700 bg-sky-50 border border-sky-200/80 px-2 py-0.5 rounded-full font-bold uppercase shrink-0">
-              Live Preview
+              Live Simulator
             </span>
           </div>
         </div>
@@ -186,33 +218,56 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
       {/* Main Workspace split */}
       <div className="flex flex-1 overflow-hidden relative">
         {/* Left Side: Sidebar controls & features (Desktop) */}
-        <aside className="w-80 border-r border-slate-200 bg-white hidden lg:flex flex-col p-6 overflow-y-auto shrink-0 space-y-8">
+        <aside className="w-80 border-r border-slate-200 bg-white hidden lg:flex flex-col p-6 overflow-y-auto shrink-0 space-y-6">
           <div>
             <h2 className="text-xs font-black uppercase text-sky-600 tracking-widest mb-1.5 flex items-center gap-1">
               <Sparkles className="h-3.5 w-3.5" /> Product Showcase
             </h2>
             <h3 className="text-lg font-bold text-slate-900">{siteInfo.name}</h3>
             <p className="text-xs text-slate-500 italic mt-1">&ldquo;{siteInfo.tagline}&rdquo;</p>
-            <p className="text-xs text-slate-600 mt-4 leading-relaxed">{siteInfo.description}</p>
+            <p className="text-xs text-slate-600 mt-3 leading-relaxed">{siteInfo.description}</p>
+          </div>
+
+          {/* Interactive Subpages Navigation List */}
+          <div className="space-y-3 pt-3 border-t border-slate-100">
+            <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 flex items-center gap-1.5">
+              <Compass className="h-4 w-4 text-sky-600" /> Preview Subpages
+            </h4>
+            <div className="grid grid-cols-2 gap-1.5">
+              {siteInfo.pages.map((pg, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleSelectPage(pg.file)}
+                  className={`px-3 py-2 rounded-lg text-xs font-bold transition-all text-left truncate flex items-center gap-1.5 cursor-pointer ${
+                    activePage === pg.file
+                      ? "bg-sky-600 text-white shadow-sm"
+                      : "bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/80"
+                  }`}
+                >
+                  <FileText className="h-3 w-3 shrink-0" />
+                  <span className="truncate">{pg.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Design Info */}
-          <div className="space-y-4">
+          <div className="space-y-3 pt-3 border-t border-slate-100">
             <h4 className="text-xs font-black uppercase tracking-widest text-slate-400">Branding System</h4>
             
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <span className="text-[10px] text-slate-500 uppercase font-bold block">Palette</span>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 flex-wrap">
                 {siteInfo.colors.map((c, i) => (
-                  <div key={i} className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-2 py-1 rounded-md text-[10px] text-slate-700">
-                    <span className="h-3 w-3 rounded-full border border-slate-300 inline-block shrink-0" style={{ backgroundColor: c.hex }} />
+                  <div key={i} className="flex items-center gap-1 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-md text-[10px] text-slate-700">
+                    <span className="h-2.5 w-2.5 rounded-full border border-slate-300 inline-block shrink-0" style={{ backgroundColor: c.hex }} />
                     <span className="font-medium">{c.name}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <span className="text-[10px] text-slate-500 uppercase font-bold block">Design Vibe</span>
               <span className="text-xs font-semibold text-sky-800 bg-sky-50 border border-sky-200/80 px-2.5 py-1 rounded-lg block">
                 {siteInfo.designVibe}
@@ -221,11 +276,11 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
           </div>
 
           {/* Special Features */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-widest text-slate-400">Custom Clinical Modules</h4>
-            <ul className="space-y-2 text-xs">
+          <div className="space-y-2 pt-3 border-t border-slate-100">
+            <h4 className="text-xs font-black uppercase tracking-widest text-slate-400">Clinical Modules</h4>
+            <ul className="space-y-1.5 text-xs">
               {siteInfo.features.map((feat, i) => (
-                <li key={i} className="flex items-start gap-2 text-slate-700">
+                <li key={i} className="flex items-start gap-1.5 text-slate-700">
                   <CheckCircle className="h-3.5 w-3.5 text-sky-600 shrink-0 mt-0.5" />
                   <span>{feat}</span>
                 </li>
@@ -234,14 +289,14 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
           </div>
 
           {/* Switcher Cards */}
-          <div className="space-y-3 pt-4 border-t border-slate-100 mt-auto">
-            <h4 className="text-xs font-black uppercase tracking-widest text-slate-400">Switch Demo Practice</h4>
-            <div className="space-y-2">
+          <div className="space-y-2 pt-3 border-t border-slate-100 mt-auto">
+            <h4 className="text-xs font-black uppercase tracking-widest text-slate-400">Switch Practice Demo</h4>
+            <div className="space-y-1.5">
               {Object.entries(SITES_METADATA).map(([key, site]) => (
                 <button
                   key={key}
                   onClick={() => handleSwitchSite(key)}
-                  className={`w-full text-left p-3 rounded-xl border text-xs transition-all cursor-pointer ${
+                  className={`w-full text-left p-2.5 rounded-xl border text-xs transition-all cursor-pointer ${
                     activeSite === key 
                       ? "border-sky-600 bg-sky-50/80 text-sky-900 font-bold shadow-sm" 
                       : "border-slate-200 bg-white hover:bg-slate-50 text-slate-600"
@@ -256,16 +311,36 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
         </aside>
 
         {/* Center: Live Device Viewport Canvas */}
-        <main className="flex-1 bg-slate-200/80 flex items-center justify-center p-2 sm:p-4 md:p-8 overflow-hidden relative">
+        <main className="flex-1 bg-slate-200/80 flex flex-col items-center p-2 sm:p-4 md:p-6 overflow-hidden relative">
+          {/* Top Quick Page Navigation Tabs (Mobile & Tablet & Desktop quick toolbar) */}
+          <div className="w-full max-w-full overflow-x-auto pb-2 flex items-center gap-1.5 scrollbar-none shrink-0 mb-2">
+            <span className="text-[11px] font-black uppercase tracking-wider text-slate-600 bg-slate-300/60 px-2.5 py-1 rounded-md shrink-0 flex items-center gap-1">
+              <Compass className="h-3 w-3 text-sky-700" /> Pages:
+            </span>
+            {siteInfo.pages.map((pg, i) => (
+              <button
+                key={i}
+                onClick={() => handleSelectPage(pg.file)}
+                className={`px-3 py-1 rounded-full text-xs font-extrabold transition-all shrink-0 cursor-pointer shadow-sm ${
+                  activePage === pg.file
+                    ? "bg-sky-600 text-white ring-2 ring-sky-400"
+                    : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-300/80"
+                }`}
+              >
+                {pg.label}
+              </button>
+            ))}
+          </div>
+
           {loading && (
             <div className="absolute inset-0 bg-slate-900/10 backdrop-blur-sm z-20 flex flex-col items-center justify-center gap-3 text-slate-700 font-bold text-sm">
               <Loader2 className="h-8 w-8 text-sky-600 animate-spin" />
-              <span>Loading Medical Simulator...</span>
+              <span>Loading Page...</span>
             </div>
           )}
 
           <div 
-            className="h-full bg-white rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 border border-slate-300 flex flex-col relative w-full"
+            className="h-full bg-white rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 border border-slate-300 flex flex-col relative w-full flex-1"
             style={{ width: getDeviceWidth(), maxWidth: "100%" }}
           >
             {/* Browser Address Bar Header */}
@@ -277,16 +352,17 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
               </div>
               <div className="flex-1 bg-white border border-slate-200/80 rounded-md px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-mono text-slate-500 truncate flex items-center gap-1.5">
                 <span className="text-emerald-600 font-bold">https://</span>
-                <span className="text-slate-800 truncate">{activeSite}.demo-healux.com</span>
+                <span className="text-slate-800 truncate">{activeSite}.demo-healux.com/{activePage === "index.html" ? "" : activePage}</span>
               </div>
             </div>
 
             {/* Live iFrame View */}
             <iframe 
+              key={currentPathKey}
               src={iframeUrl}
               onLoad={handleIframeLoad}
               className="w-full flex-1 border-none bg-white"
-              title={siteInfo.name}
+              title={`${siteInfo.name} - ${activePage}`}
             />
           </div>
         </main>
@@ -294,3 +370,4 @@ export default function LiveSimulatorModal({ initialSite = "activemotion-physio"
     </div>
   );
 }
+

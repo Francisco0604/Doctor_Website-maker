@@ -18,6 +18,18 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/samples/:site/:page',
+        destination: '/samples/:site/:page.html',
+      },
+      {
+        source: '/samples/:site/:page/',
+        destination: '/samples/:site/:page/index.html',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

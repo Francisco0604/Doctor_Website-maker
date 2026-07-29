@@ -12,9 +12,47 @@ const basePath = isVercel ? "" : (repo ? `/${repo}` : "");
 
 const siteRoutesMap = {
   "activemotion-physio": ["conditions", "treatments", "testimonials", "blog", "appointment", "contact", "privacy", "terms"],
-  "brightsmile-dental": ["treatments", "pricing", "testimonials", "gallery", "faq", "contact", "appointment"],
-  "familycare-clinic": ["services", "about", "appointment", "contact"]
+  "brightsmile-dental": ["treatments", "pricing", "testimonials", "gallery", "faq", "contact", "appointment", "privacy", "terms"],
+  "familycare-clinic": ["services", "about", "appointment", "contact", "privacy", "terms"]
 };
+
+// Copy built output from Sample/ to public/samples/ if available
+function copySamplesFromSource() {
+  const rootDir = path.resolve(process.cwd(), "..");
+  const samplesSourceDir = path.resolve(rootDir, "Sample");
+  const targetPublicSamples = path.resolve(process.cwd(), "public", "samples");
+
+  if (!fs.existsSync(samplesSourceDir)) return;
+
+  for (const siteName of Object.keys(siteRoutesMap)) {
+    const siteOutDir = path.join(samplesSourceDir, siteName, "out");
+    const siteTargetDir = path.join(targetPublicSamples, siteName);
+
+    if (fs.existsSync(siteOutDir)) {
+      if (!fs.existsSync(siteTargetDir)) {
+        fs.mkdirSync(siteTargetDir, { recursive: true });
+      }
+      copyRecursiveSync(siteOutDir, siteTargetDir);
+      console.log(`Copied ${siteName} build from Sample/${siteName}/out to public/samples/${siteName}`);
+    }
+  }
+}
+
+function copyRecursiveSync(src, dest) {
+  const exists = fs.existsSync(src);
+  const stats = exists && fs.statSync(src);
+  const isDirectory = exists && stats.isDirectory();
+  if (isDirectory) {
+    if (!fs.existsSync(dest)) {
+      fs.mkdirSync(dest, { recursive: true });
+    }
+    fs.readdirSync(src).forEach((childItemName) => {
+      copyRecursiveSync(path.join(src, childItemName), path.join(dest, childItemName));
+    });
+  } else {
+    fs.copyFileSync(src, dest);
+  }
+}
 
 function replaceInDir(dir) {
   if (!fs.existsSync(dir)) return;
@@ -63,18 +101,41 @@ function replaceInDir(dir) {
 
       for (const [siteName, routes] of Object.entries(siteRoutesMap)) {
         if (fullPath.includes(siteName)) {
-          for (const route of routes) {
-            const targetHref = `href:"/${route}"`;
-            const replacementHref = `href:"${basePath}/samples/${siteName}/${route}"`;
-            if (content.includes(targetHref)) {
-              content = content.replaceAll(targetHref, replacementHref);
+          // Replace Home links to point to index.html explicitly
+          const homeTargets = [
+            `href="/samples/${siteName}"`,
+            `href="/samples/${siteName}/"`,
+            `href:"/samples/${siteName}"`,
+            `href:"/samples/${siteName}/"`
+          ];
+          for (const target of homeTargets) {
+            if (content.includes(target)) {
+              content = content.replaceAll(target, target.includes('href:') ? `href:"${basePath}/samples/${siteName}/index.html"` : `href="${basePath}/samples/${siteName}/index.html"`);
               modified = true;
             }
-            const htmlTargetHref = `href="/${route}"`;
-            const htmlReplacementHref = `href="${basePath}/samples/${siteName}/${route}"`;
-            if (content.includes(htmlTargetHref)) {
-              content = content.replaceAll(htmlTargetHref, htmlReplacementHref);
-              modified = true;
+          }
+
+          for (const route of routes) {
+            const targets = [
+              `href="/samples/${siteName}/${route}"`,
+              `href="/samples/${siteName}/${route}/"`,
+              `href:"/samples/${siteName}/${route}"`,
+              `href:"/samples/${siteName}/${route}/"`,
+              `href="/${route}"`,
+              `href="/${route}/"`,
+              `href:"/${route}"`,
+              `href:"/${route}/"`
+            ];
+
+            for (const target of targets) {
+              if (content.includes(target)) {
+                const isColon = target.includes('href:');
+                const replacement = isColon 
+                  ? `href:"${basePath}/samples/${siteName}/${route}.html"`
+                  : `href="${basePath}/samples/${siteName}/${route}.html"`;
+                content = content.replaceAll(target, replacement);
+                modified = true;
+              }
             }
           }
         }
@@ -125,6 +186,9 @@ function ensureSubfolderIndexes(sampleRootDir) {
   }
 }
 
+console.log("Copying latest sample builds...");
+copySamplesFromSource();
+
 console.log(`Updating /samples/ paths with prefix '${basePath}'...`);
 const outSamplesDir = path.resolve(process.cwd(), "out", "samples");
 const publicSamplesDir = path.resolve(process.cwd(), "public", "samples");
@@ -136,3 +200,4 @@ ensureSubfolderIndexes(outSamplesDir);
 ensureSubfolderIndexes(publicSamplesDir);
 
 console.log("Done updating sample paths and subfolder index files!");
+
