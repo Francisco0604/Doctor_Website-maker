@@ -102,8 +102,8 @@ export default function AgencyHomePage() {
       {/* Header / Navigation */}
       <nav className="fixed top-0 inset-x-0 h-16 sm:h-20 bg-white/90 backdrop-blur-md border-b border-slate-200/80 z-50 flex items-center justify-between px-4 sm:px-6 md:px-12 shadow-sm">
         <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group">
-          <div className="h-9 w-9 sm:h-10 sm:w-10 bg-gradient-to-br from-sky-500 to-teal-600 rounded-xl flex items-center justify-center shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform shrink-0">
-            <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-white stroke-[2.5]" />
+          <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl overflow-hidden shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform shrink-0 border border-slate-200/80">
+            <img src="/logo.jpg" alt="HealUX Studios Logo" className="w-full h-full object-cover" />
           </div>
           <div>
             <span className="text-lg sm:text-xl font-black tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors">HealUX</span>
@@ -667,8 +667,8 @@ export default function AgencyHomePage() {
       {/* Footer */}
       <footer className="bg-slate-900 border-t border-slate-800 py-10 sm:py-12 px-4 sm:px-6 md:px-12 text-center text-xs text-slate-400 space-y-4">
         <div className="flex items-center justify-center gap-2">
-          <div className="h-6 w-6 sm:h-7 sm:w-7 bg-sky-600 rounded-lg flex items-center justify-center">
-            <Heart className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white stroke-[2.5]" />
+          <div className="h-7 w-7 rounded-lg overflow-hidden border border-slate-700">
+            <img src="/logo.jpg" alt="HealUX Studios Logo" className="w-full h-full object-cover" />
           </div>
           <span className="font-extrabold text-white text-xs sm:text-sm">HealUX Studios</span>
         </div>
