@@ -1,4 +1,4 @@
-# 📞 Cold Calling Scripts, Hooks & Objection Handling Guide
+# 📞 Master Cold Calling Playbook & Objection Handling Guide
 > **Agency**: HealUX Studios | **Industry**: Medical & Dental Clinic Web Design (India Market)
 
 ---
